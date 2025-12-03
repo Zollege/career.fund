@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career.Fund - AI-Powered Tuition Financing for Vocational Schools</title>
+    <meta name="description" content="Transform your trade school with Career.Fund's AI-powered tuition financing platform. Flexible payment plans, automated collections, and seamless enrollment.">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 100%);
+            --accent-color: #667eea;
+            --accent-secondary: #764ba2;
+            --text-light: #a0aec0;
+            --bg-dark: #0f0f23;
+            --bg-card: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.1) 0%, transparent 40%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2%, 2%) rotate(1deg); }
+            50% { transform: translate(0, 4%) rotate(0deg); }
+            75% { transform: translate(-2%, 2%) rotate(-1deg); }
+        }
+
+        /* Grid Pattern Overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(102, 126, 234, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(102, 126, 234, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+        }
+
+        .btn-primary-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-outline-light-custom {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .btn-outline-light-custom:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 6rem;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge i {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 540px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-preview {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dashboard-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dashboard-dots span:nth-child(1) { background: #ff5f56; }
+        .dashboard-dots span:nth-child(2) { background: #ffbd2e; }
+        .dashboard-dots span:nth-child(3) { background: #27ca40; }
+
+        .dashboard-content {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .ai-indicator {
+            display: flex;
+            align-items: center;
+            background: rgba(118, 75, 162, 0.1);
+            border: 1px solid rgba(118, 75, 162, 0.3);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+        }
+
+        .ai-pulse {
+            width: 10px;
+            height: 10px;
+            background: #27ca40;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Trusted By Section */
+        .trusted-section {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .trusted-title {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .trusted-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            opacity: 0.6;
+        }
+
+        .trusted-logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(102, 126, 234, 0.05) 50%, transparent 100%);
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-it-works-section {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, rgba(102, 126, 234, 0.03) 0%, transparent 100%);
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-connector {
+            position: absolute;
+            top: 50px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+            opacity: 0.3;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 6rem 0;
+        }
+
+        .benefit-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .benefit-content {
+            padding: 2rem;
+        }
+
+        .benefit-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-description {
+            color: var(--text-light);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefit-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .benefit-list li i {
+            color: #27ca40;
+            margin-right: 0.75rem;
+        }
+
+        .benefit-visual {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .payment-option i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+        }
+
+        .payment-option-content h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .payment-option-content p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* AI Section */
+        .ai-section {
+            padding: 6rem 0;
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+        }
+
+        .ai-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-features {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .ai-feature-item {
+            display: flex;
+            align-items: flex-start;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .ai-feature-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .ai-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .ai-feature-content h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-feature-content p {
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Testimonial Section */
+        .testimonial-section {
+            padding: 6rem 0;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+
+        .testimonial-info h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--primary-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-white {
+            background: #ffffff;
+            color: var(--accent-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: var(--accent-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            color: var(--text-light);
+            max-width: 300px;
+            line-height: 1.6;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-visual {
+                margin-top: 3rem;
+            }
+
+            .step-connector {
+                display: none;
+            }
+
+            .benefit-row {
+                flex-direction: column;
+            }
+
+            .benefit-row.reverse {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 1.75rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Floating Elements Animation */
+        .float-element {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            animation: floatElement 15s ease-in-out infinite;
+        }
+
+        .float-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .float-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 5%;
+            animation-delay: -5s;
+        }
+
+        .float-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            left: 15%;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatElement {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(20px, -20px); }
+            50% { transform: translate(0, -40px); }
+            75% { transform: translate(-20px, -20px); }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Career.Fund</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#benefits">Benefits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="#contact" class="btn btn-outline-light-custom">Login</a>
+                    <a href="#contact" class="btn btn-primary-gradient">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg">
+            <div class="float-element"></div>
+            <div class="float-element"></div>
+            <div class="float-element"></div>
+        </div>
+        <div class="grid-overlay"></div>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="bi bi-stars"></i>
+                            <span>AI-Powered Tuition Platform</span>
+                        </div>
+                        <h1 class="hero-title">
+                            Transform Your <span class="gradient-text">Trade School</span> With Smart Financing
+                        </h1>
+                        <p class="hero-subtitle">
+                            Career.Fund empowers vocational schools with AI-driven tuition financing, automated payments, and seamless enrollment management. Increase student access while securing predictable revenue.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="#contact" class="btn btn-primary-gradient btn-lg">
+                                <i class="bi bi-rocket-takeoff me-2"></i>Schedule Demo
+                            </a>
+                            <a href="#features" class="btn btn-outline-light-custom btn-lg">
+                                <i class="bi bi-play-circle me-2"></i>Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-visual">
+                        <div class="dashboard-preview">
+                            <div class="dashboard-header">
+                                <div class="dashboard-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="dashboard-content">
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="stat-card">
+                                            <h4>$2.4M</h4>
+                                            <p>Tuition Processed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-card">
+                                            <h4>1,247</h4>
+                                            <p>Active Students</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-card">
+                                            <h4>98.5%</h4>
+                                            <p>Collection Rate</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-card">
+                                            <h4>45%</h4>
+                                            <p>Enrollment Growth</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ai-indicator">
+                                    <div class="ai-pulse"></div>
+                                    <span>AI Assistant analyzing payment patterns...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="trusted-section">
+        <div class="container">
+            <p class="trusted-title text-center">Trusted by Leading Vocational Institutions</p>
+            <div class="trusted-logos">
+                <span class="trusted-logo">National Trade Academy</span>
+                <span class="trusted-logo">TechSkills Institute</span>
+                <span class="trusted-logo">Allied Health College</span>
+                <span class="trusted-logo">American Trade Schools</span>
+                <span class="trusted-logo">CareerPath Education</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">$50M+</div>
+                        <div class="stat-label">Tuition Financed</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Students Served</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Partner Schools</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="section-badge">
+                    <i class="bi bi-gear me-2"></i>Platform Features
+                </div>
+                <h2 class="section-title">Everything You Need to Scale</h2>
+                <p class="section-subtitle">
+                    A comprehensive suite of tools designed specifically for vocational education financing and operations.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <h3 class="feature-title">Flexible Payment Plans</h3>
+                        <p class="feature-description">
+                            Offer customized payment options including upfront payments, installment plans, income-share agreements, and hybrid structures tailored to each student's needs.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <h3 class="feature-title">AI-Powered Engagement</h3>
+                        <p class="feature-description">
+                            Engage prospective students through intelligent conversations that qualify leads and guide them through personalized payment plan discussions.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3 class="feature-title">Real-Time Analytics</h3>
+                        <p class="feature-description">
+                            Access comprehensive dashboards with at-a-glance metrics on student applications, invoices, payments, attendance, and outcomes.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="feature-title">Automated Collections</h3>
+                        <p class="feature-description">
+                            We handle collections and servicing on your behalf, keeping your revenue predictable and reducing administrative burden.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h3 class="feature-title">Student Management</h3>
+                        <p class="feature-description">
+                            Full-service SIS capabilities with unified visibility into every student interaction from application through graduation and beyond.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-bank"></i>
+                        </div>
+                        <h3 class="feature-title">Lender Marketplace</h3>
+                        <p class="feature-description">
+                            Connect students with multiple financing options through our integrated lender marketplace, increasing approval rates and enrollment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section" id="how-it-works">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="section-badge">
+                    <i class="bi bi-lightning me-2"></i>Simple Process
+                </div>
+                <h2 class="section-title">Get Started in Minutes</h2>
+                <p class="section-subtitle">
+                    Launch your tuition financing program quickly with our streamlined onboarding process.
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-connector d-none d-lg-block"></div>
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Connect Your School</h3>
+                        <p class="step-description">
+                            Quick integration with your existing systems. We'll configure your custom dashboard and payment options.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-connector d-none d-lg-block"></div>
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Design Payment Plans</h3>
+                        <p class="step-description">
+                            Create flexible financing options that work for your students—from zero-interest plans to income-share agreements.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-connector d-none d-lg-block"></div>
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Enroll Students</h3>
+                        <p class="step-description">
+                            Students apply through our AI-powered platform that guides them to the best financing option for their situation.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">We Handle the Rest</h3>
+                        <p class="step-description">
+                            Automated billing, collections, and reporting. Focus on education while we manage the finances.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section" id="benefits">
+        <div class="container">
+            <!-- Benefit 1: For Schools -->
+            <div class="row benefit-row align-items-center mb-5">
+                <div class="col-lg-6">
+                    <div class="benefit-content">
+                        <div class="section-badge">
+                            <i class="bi bi-building me-2"></i>For Schools
+                        </div>
+                        <h2 class="benefit-title">Increase Enrollment & Revenue</h2>
+                        <p class="benefit-description">
+                            Remove financial barriers that prevent qualified students from enrolling. Our platform helps you capture more students while maintaining predictable cash flow.
+                        </p>
+                        <ul class="benefit-list">
+                            <li><i class="bi bi-check-circle-fill"></i>Reduce enrollment drop-off by up to 40%</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Predictable monthly revenue streams</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Zero collection headaches</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Comprehensive compliance support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="benefit-visual">
+                        <div class="payment-options">
+                            <div class="payment-option">
+                                <i class="bi bi-cash-stack"></i>
+                                <div class="payment-option-content">
+                                    <h5>Upfront Payment</h5>
+                                    <p>Full tuition with discount incentives</p>
+                                </div>
+                            </div>
+                            <div class="payment-option">
+                                <i class="bi bi-calendar-check"></i>
+                                <div class="payment-option-content">
+                                    <h5>Monthly Installments</h5>
+                                    <p>Flexible 6-24 month payment plans</p>
+                                </div>
+                            </div>
+                            <div class="payment-option">
+                                <i class="bi bi-percent"></i>
+                                <div class="payment-option-content">
+                                    <h5>Zero-Interest Options</h5>
+                                    <p>Income-qualified interest-free financing</p>
+                                </div>
+                            </div>
+                            <div class="payment-option">
+                                <i class="bi bi-briefcase"></i>
+                                <div class="payment-option-content">
+                                    <h5>Income Share Agreements</h5>
+                                    <p>Pay after employment with % of income</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefit 2: For Students -->
+            <div class="row benefit-row align-items-center flex-lg-row-reverse">
+                <div class="col-lg-6">
+                    <div class="benefit-content">
+                        <div class="section-badge">
+                            <i class="bi bi-mortarboard me-2"></i>For Students
+                        </div>
+                        <h2 class="benefit-title">Education Made Accessible</h2>
+                        <p class="benefit-description">
+                            Students deserve fair, transparent financing options. Our AI-powered platform matches each student with the best payment plan for their unique situation.
+                        </p>
+                        <ul class="benefit-list">
+                            <li><i class="bi bi-check-circle-fill"></i>Multiple financing options to choose from</li>
+                            <li><i class="bi bi-check-circle-fill"></i>No hidden fees or surprise charges</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Income-based payment flexibility</li>
+                            <li><i class="bi bi-check-circle-fill"></i>24/7 AI support and guidance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="benefit-visual">
+                        <div class="text-center p-4">
+                            <div class="mb-4">
+                                <i class="bi bi-person-check" style="font-size: 4rem; color: var(--accent-color);"></i>
+                            </div>
+                            <h4 class="mb-3">Student Success Journey</h4>
+                            <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 300px; margin: 0 auto;">
+                                <span style="color: var(--text-light);">Application</span>
+                                <i class="bi bi-arrow-right" style="color: var(--accent-color);"></i>
+                                <span style="color: var(--text-light);">Approval</span>
+                                <i class="bi bi-arrow-right" style="color: var(--accent-color);"></i>
+                                <span style="color: var(--text-light);">Career</span>
+                            </div>
+                            <p style="color: var(--text-light);">Average approval time: <strong style="color: #27ca40;">Under 5 minutes</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Section -->
+    <section class="ai-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="ai-content">
+                        <div class="section-badge">
+                            <i class="bi bi-cpu me-2"></i>AI Technology
+                        </div>
+                        <h2 class="section-title">Powered by Intelligent Automation</h2>
+                        <p class="section-subtitle text-start" style="margin-left: 0;">
+                            Our AI engine works around the clock to engage prospects, optimize payment plans, and predict student success—all while reducing your administrative workload.
+                        </p>
+
+                        <div class="ai-features">
+                            <div class="ai-feature-item">
+                                <div class="ai-feature-icon">
+                                    <i class="bi bi-chat-dots"></i>
+                                </div>
+                                <div class="ai-feature-content">
+                                    <h4>Conversational AI</h4>
+                                    <p>Engage prospective students 24/7 with intelligent chatbots that answer questions and qualify leads.</p>
+                                </div>
+                            </div>
+                            <div class="ai-feature-item">
+                                <div class="ai-feature-icon">
+                                    <i class="bi bi-bar-chart"></i>
+                                </div>
+                                <div class="ai-feature-content">
+                                    <h4>Predictive Analytics</h4>
+                                    <p>Identify at-risk students early and optimize collection strategies with machine learning.</p>
+                                </div>
+                            </div>
+                            <div class="ai-feature-item">
+                                <div class="ai-feature-icon">
+                                    <i class="bi bi-magic"></i>
+                                </div>
+                                <div class="ai-feature-content">
+                                    <h4>Smart Matching</h4>
+                                    <p>Automatically match students with the optimal payment plan based on their financial profile.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center p-4">
+                        <div style="position: relative; display: inline-block;">
+                            <div style="width: 300px; height: 300px; border-radius: 50%; background: var(--primary-gradient); opacity: 0.1; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 3s ease-in-out infinite;"></div>
+                            <div style="width: 200px; height: 200px; border-radius: 50%; background: var(--primary-gradient); opacity: 0.2; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 3s ease-in-out infinite 0.5s;"></div>
+                            <i class="bi bi-cpu" style="font-size: 8rem; position: relative; z-index: 1; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                        </div>
+                        <h4 class="mt-4 mb-2">AI Processing</h4>
+                        <p style="color: var(--text-light);">Analyzing 10,000+ data points per student</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonial-section" id="testimonials">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="section-badge">
+                    <i class="bi bi-heart me-2"></i>Testimonials
+                </div>
+                <h2 class="section-title">Loved by Schools Nationwide</h2>
+                <p class="section-subtitle">
+                    See what administrators and students are saying about Career.Fund.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Career.Fund transformed our enrollment process. We've seen a 35% increase in student enrollment since implementing their platform. The AI-powered engagement is incredible."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">MJ</div>
+                            <div class="testimonial-info">
+                                <h5>Maria Johnson</h5>
+                                <p>Director, TechSkills Institute</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The automated collections alone saved us 20 hours per week. Now our team can focus on what matters most—student success. Highly recommend to any trade school."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">RD</div>
+                            <div class="testimonial-info">
+                                <h5>Robert Davis</h5>
+                                <p>CFO, Allied Health Academy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "As a student, the payment flexibility made it possible for me to pursue my welding certification. The zero-interest option was a game-changer for my family."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">JS</div>
+                            <div class="testimonial-info">
+                                <h5>James Smith</h5>
+                                <p>Graduate, Welding Program</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your School?</h2>
+                <p class="cta-subtitle">
+                    Join hundreds of vocational schools already using Career.Fund to increase enrollment and streamline operations.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="mailto:hello@career.fund" class="btn btn-white">
+                        <i class="bi bi-calendar-check me-2"></i>Schedule a Demo
+                    </a>
+                    <a href="mailto:hello@career.fund" class="btn btn-outline-light btn-lg" style="border-radius: 50px;">
+                        <i class="bi bi-envelope me-2"></i>Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">Career.Fund</div>
+                    <p class="footer-description">
+                        AI-powered tuition financing platform helping vocational schools increase enrollment and students achieve their career goals.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Solutions</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Trade Schools</a></li>
+                        <li><a href="#">Technical Colleges</a></li>
+                        <li><a href="#">Bootcamps</a></li>
+                        <li><a href="#">Certification Programs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Career.Fund. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Smooth scroll and navbar behavior -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(15, 15, 35, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(15, 15, 35, 0.8)';
+            }
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-box, .feature-card, .step-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
